@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulearning/app_blocs.dart';
+import 'package:ulearning/app_states.dart';
+import 'package:ulearning/app_events.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,14 +37,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,23 +45,43 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+        child: BlocBuilder<AppBlocs, AppStates>(builder: (context, state) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                /// optionally we can access the state as follows BlocProvider.of(AppBlocs>(context).state.counter)
+                '${state.counter}',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ],
+          );
+        }),
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FloatingActionButton(
+              onPressed: () {
+                context.read<AppBlocs>().add(IncrementEvent());
+              },
+              tooltip: 'Increment',
+              child: const Icon(Icons.add),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            FloatingActionButton(
+              onPressed: () {
+                context.read<AppBlocs>().add(DecrementEvent());
+              },
+              tooltip: 'Decrement',
+              child: const Icon(Icons.remove),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
