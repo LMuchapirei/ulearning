@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/app_blocs.dart';
 import 'package:ulearning/app_states.dart';
 import 'package:ulearning/app_events.dart';
+import 'package:ulearning/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearning/pages/welcome/welcome.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => AppBlocs(),
+        create: (context) => WelcomeBloc(),
         child: ScreenUtilInit(
             builder: (contex, child) => MaterialApp(
                 debugShowCheckedModeBanner: false,
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
                       ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                   useMaterial3: true,
                 ),
-                home: Welcome())));
+                home: const Welcome())));
   }
 }
 
