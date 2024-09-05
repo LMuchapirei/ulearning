@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/app_blocs.dart';
 import 'package:ulearning/app_states.dart';
 import 'package:ulearning/app_events.dart';
+import 'package:ulearning/pages/signin/sign_in.dart';
 import 'package:ulearning/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearning/pages/welcome/welcome.dart';
 
@@ -17,8 +18,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => WelcomeBloc(),
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => WelcomeBloc(),
+          ),
+          BlocProvider(
+            create: (context) => AppBlocs(),
+          ),
+        ],
         child: ScreenUtilInit(
             builder: (contex, child) => MaterialApp(
                 debugShowCheckedModeBanner: false,
@@ -28,20 +36,23 @@ class MyApp extends StatelessWidget {
                       ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                   useMaterial3: true,
                 ),
+                routes: {
+                  'myHomePage': (context) => const MyHomePage(),
+                  SignIn.routeName: (context) => const SignIn()
+                },
                 home: const Welcome())));
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
+        title: Text("uLearning"),
       ),
       body: Center(
         child: BlocBuilder<AppBlocs, AppStates>(builder: (context, state) {
@@ -66,6 +77,7 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             FloatingActionButton(
+              heroTag: "HEROTAG1",
               onPressed: () {
                 /// Optionally we could also make a call as follows
                 /// BlocProvider.of<AppBloc>(context).add(IncrementEvent())
@@ -75,6 +87,7 @@ class MyHomePage extends StatelessWidget {
               child: const Icon(Icons.add),
             ),
             FloatingActionButton(
+              heroTag: "HEROTAG2",
               onPressed: () {
                 /// Optionally we could also make a call as follows
                 /// BlocProvider.of<AppBloc>(context).add(DecrementEvent())
