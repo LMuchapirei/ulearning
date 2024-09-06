@@ -13,21 +13,32 @@ AppBar buildAppBar() {
 /// We need context for accessing the bloc
 Widget buildThirdPartyLogin(BuildContext context) {
   return Container(
-      alignment: Alignment.center,
+      margin: EdgeInsets.only(top: 40.h, bottom: 20.h),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-              onTap: () {},
-              child: Container(
-                  width: 40.w,
-                  height: 40.w,
-                  child: Image.asset("assets/icons/google.png"))),
-          GestureDetector(
-              onTap: () {},
-              child: Container(
-                  width: 40.w,
-                  height: 40.w,
-                  child: Image.asset("assets/icons/google.png"))),
+          _socialLoginIcon("google"),
+          _socialLoginIcon("apple"),
+          _socialLoginIcon("facebook")
         ],
       ));
+}
+
+Widget _socialLoginIcon(String iconName) {
+  return GestureDetector(
+      onTap: () {},
+      child: SizedBox(
+          width: 40.w,
+          height: 40.w,
+          child: Image.asset("assets/icons/$iconName.png")));
+}
+
+Widget resusableText(String text) {
+  return Container(
+      margin: EdgeInsets.only(bottom: 5.h),
+      child: Text("$text",
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14.sp,
+              color: Colors.grey.withOpacity(0.7))));
 }

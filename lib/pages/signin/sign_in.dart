@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/pages/signin/widgets/sign_in_widget.dart';
 
 class SignIn extends StatefulWidget {
@@ -16,7 +17,18 @@ class _SignInState extends State<SignIn> {
       child: SafeArea(
         child: Scaffold(
             body: SingleChildScrollView(
-                child: Column(children: [buildThirdPartyLogin(context)])),
+              child: Column(children: [
+                buildThirdPartyLogin(context),
+                resusableText("Or use your email account login"),
+                Container(
+                    margin: EdgeInsets.only(top: 66.h),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          resusableText("Email"),
+                        ]))
+              ]),
+            ),
             backgroundColor: Colors.white,
             appBar: buildAppBar()),
       ),
