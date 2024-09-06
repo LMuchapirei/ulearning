@@ -15,7 +15,12 @@ class _SignInState extends State<SignIn> {
         color: Colors.white,
         child: SafeArea(
             child: Scaffold(
+                backgroundColor: Colors.white,
                 appBar: AppBar(
+                    bottom: PreferredSize(
+                        preferredSize: const Size.fromHeight(1),
+                        child: Container(
+                            color: Colors.grey.withOpacity(0.5), height: 1.0)),
                     title: Text("Login",
                         style: TextStyle(
                             fontSize: 16.sp, color: Colors.black))))));
