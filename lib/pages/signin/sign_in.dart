@@ -19,13 +19,21 @@ class _SignInState extends State<SignIn> {
             body: SingleChildScrollView(
               child: Column(children: [
                 buildThirdPartyLogin(context),
-                resusableText("Or use your email account login"),
+                Center(child: resusableText("Or use your email account login")),
                 Container(
                     margin: EdgeInsets.only(top: 66.h),
+                    padding: EdgeInsets.only(left: 25.w, right: 25.w),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           resusableText("Email"),
+                          SizedBox(height: 5.h),
+                          buildTextField(
+                              "Enter your email address", "email", "user"),
+                          resusableText("Password"),
+                          SizedBox(height: 5.h),
+                          buildTextField(
+                              "Enter your password", "password", "lock")
                         ]))
               ]),
             ),
