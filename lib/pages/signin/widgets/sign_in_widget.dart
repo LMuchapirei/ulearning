@@ -85,8 +85,57 @@ Widget buildTextField(String hintText, String textType, String iconName) {
       ]));
 }
 
+Widget forgotPassword() {
+  return Container(
+    width: 260.w,
+    height: 44.h,
+    child: GestureDetector(
+        onTap: () {},
+        child: const Text("Forgot password",
+            style: TextStyle(
+                color: Colors.black,
+                decoration: TextDecoration.underline,
+                decorationColor: Colors.blue))),
+  );
+}
+
+Widget buildLogInAndRegButton(String buttonName, ButtonType buttonType) {
+  return GestureDetector(
+      onTap: () {},
+      child: Container(
+          width: 325.w,
+          height: 50.h,
+          margin: EdgeInsets.only(
+              top: buttonType == ButtonType.login ? 40.h : 20.h),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              color:
+                  buttonType == ButtonType.login ? Colors.blue : Colors.white,
+              borderRadius: BorderRadius.circular(15.w),
+              border: buttonType == ButtonType.login
+                  ? Border.all(color: Colors.transparent)
+                  : Border.all(color: Colors.black),
+              boxShadow: [
+                BoxShadow(
+                  spreadRadius: 1,
+                  blurRadius: 2,
+                  offset: Offset(0, 1),
+                  color: Colors.grey.withOpacity(0.1),
+                )
+              ]),
+          child: Text(buttonName,
+              style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.normal,
+                  color: buttonType == ButtonType.login
+                      ? Colors.white
+                      : Colors.black))));
+}
+
 extension StrUtils on String {
   bool isPassword() {
     return this == "password";
   }
 }
+
+enum ButtonType { register, login }
