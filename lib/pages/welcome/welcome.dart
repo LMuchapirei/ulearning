@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:ulearning/common/values/colors.dart';
 import 'package:ulearning/main.dart';
 import 'package:ulearning/pages/signin/sign_in.dart';
 import 'package:ulearning/pages/welcome/bloc/welcome_blocs.dart';
@@ -63,13 +64,15 @@ class _WelcomeState extends State<Welcome> {
                         right: 0,
                         left: 0,
                         bottom: 50.h,
+
+                        /// NEED to make this responsive
                         child: DotsIndicator(
                             dotsCount: 3,
                             position: state.page,
                             mainAxisAlignment: MainAxisAlignment.center,
                             decorator: DotsDecorator(
-                                color: Colors.grey,
-                                activeColor: Colors.blue,
+                                color: AppColors.primaryThirdElementText,
+                                activeColor: AppColors.primaryElement,
                                 size: const Size.square(8.0),
                                 activeSize: const Size(18.0, 8.0),
                                 activeShape: RoundedRectangleBorder(
@@ -91,7 +94,7 @@ class _WelcomeState extends State<Welcome> {
               child: Text(title,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.black,
+                      color: AppColors.primaryText,
                       fontWeight: FontWeight.normal,
                       fontSize: 24.sp))),
           Container(
@@ -100,7 +103,7 @@ class _WelcomeState extends State<Welcome> {
               child: Text(subTitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.black.withOpacity(0.5),
+                      color: AppColors.primarySecondaryElementText,
                       fontWeight: FontWeight.normal,
                       fontSize: 14.sp))),
           GestureDetector(
@@ -122,7 +125,7 @@ class _WelcomeState extends State<Welcome> {
                 height: 50.h,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(15.w)),
-                    color: Colors.blue,
+                    color: AppColors.primaryElement,
                     boxShadow: [
                       BoxShadow(
                           color: Colors.grey.withOpacity(0.1),

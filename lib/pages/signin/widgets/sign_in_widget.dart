@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning/common/values/colors.dart';
 
 AppBar buildAppBar() {
   return AppBar(
       bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
-          child: Container(color: Colors.grey.withOpacity(0.5), height: 1.0)),
+          child: Container(
+              color: AppColors.primarySecondaryBackground, height: 1.0)),
       title: Text("Login",
-          style: TextStyle(fontSize: 16.sp, color: Colors.black)));
+          style: TextStyle(fontSize: 16.sp, color: AppColors.primaryText)));
 }
 
 /// We need context for accessing the bloc
 Widget buildThirdPartyLogin(BuildContext context) {
   return Container(
       margin: EdgeInsets.only(top: 40.h, bottom: 20.h),
+      padding: EdgeInsets.symmetric(horizontal: 25.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -51,7 +54,7 @@ Widget buildTextField(String hintText, String textType, String iconName) {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(15.w)),
-          border: Border.all(color: Colors.black)),
+          border: Border.all(color: AppColors.primaryFourthElementText)),
       child: Row(children: [
         Container(
             width: 16.w,
@@ -66,13 +69,14 @@ Widget buildTextField(String hintText, String textType, String iconName) {
                 autocorrect: false,
                 obscureText: textType.isPassword(),
                 style: TextStyle(
-                    color: Colors.black,
+                    color: AppColors.primaryText,
                     fontFamily: "Avenir",
                     fontWeight: FontWeight.normal,
                     fontSize: 12.sp),
                 decoration: InputDecoration(
                     hintText: hintText,
-                    hintStyle: TextStyle(color: Colors.grey.withOpacity(0.5)),
+                    hintStyle: const TextStyle(
+                        color: AppColors.primarySecondaryElementText),
                     border: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.transparent),
                     ),
@@ -93,9 +97,9 @@ Widget forgotPassword() {
         onTap: () {},
         child: const Text("Forgot password",
             style: TextStyle(
-                color: Colors.black,
+                color: AppColors.primaryText,
                 decoration: TextDecoration.underline,
-                decorationColor: Colors.blue))),
+                decorationColor: AppColors.primaryText))),
   );
 }
 
@@ -109,17 +113,19 @@ Widget buildLogInAndRegButton(String buttonName, ButtonType buttonType) {
               top: buttonType == ButtonType.login ? 40.h : 20.h),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-              color:
-                  buttonType == ButtonType.login ? Colors.blue : Colors.white,
+              color: buttonType == ButtonType.login
+                  ? AppColors.primaryElement
+                  : AppColors.primaryBackground,
               borderRadius: BorderRadius.circular(15.w),
-              border: buttonType == ButtonType.login
-                  ? Border.all(color: Colors.transparent)
-                  : Border.all(color: Colors.black),
+              border: Border.all(
+                  color: buttonType == ButtonType.login
+                      ? Colors.transparent
+                      : AppColors.primaryFourthElementText),
               boxShadow: [
                 BoxShadow(
                   spreadRadius: 1,
                   blurRadius: 2,
-                  offset: Offset(0, 1),
+                  offset: const Offset(0, 1),
                   color: Colors.grey.withOpacity(0.1),
                 )
               ]),
@@ -128,8 +134,8 @@ Widget buildLogInAndRegButton(String buttonName, ButtonType buttonType) {
                   fontSize: 16.sp,
                   fontWeight: FontWeight.normal,
                   color: buttonType == ButtonType.login
-                      ? Colors.white
-                      : Colors.black))));
+                      ? AppColors.primaryBackground
+                      : AppColors.primaryText))));
 }
 
 extension StrUtils on String {
